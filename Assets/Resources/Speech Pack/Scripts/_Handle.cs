@@ -63,8 +63,8 @@ public partial class Wit3D : MonoBehaviour {
 
 
             if (!actionFound) {
-				myHandleTextBox.text = "Request unknown, please ask a different way.";
-			} else {
+				myHandleTextBox.text = _language.CommandManager[4];
+            } else {
 				actionFound = false;
 			}
 

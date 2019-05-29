@@ -10,17 +10,27 @@ public class ARSceneManager : MonoBehaviour
     public GameObject CardInfo;
     public GameObject ArGround;
     public Slider CarScaleSlider;
+    public GameObject CommandList;
 
     // Reference for GameObjects
     private GameObject _selectedCar;
     private Material _selectedCarMaterial;
     [SerializeField] private List<GameObject> _cars;
 
-    // Temp Material to keep orjinal Material 
+    // Temp Material to keep orijinal Material 
     private Material _tempMaterial;
+
+    // Localization
+    internal LanguageInfo Language;
 
     void Start()
     {
+        // Set up Localization
+        if (PlayerPrefs.GetInt("Language") == 0)
+            Language = Resources.Load(@"Language\ENG") as LanguageInfo;
+        else
+            Language = Resources.Load(@"Language\TR") as LanguageInfo;
+
         // Added Cars to List
         _cars = new List<GameObject>();
         foreach (Transform car in ArGround.transform)
@@ -47,6 +57,22 @@ public class ARSceneManager : MonoBehaviour
 
         // Starting slider Value
         CarScaleSlider.value = 0.5f;
+    }
+
+    // Open Commands Section
+    public void OpenCommands(bool yes)
+    {
+        if (yes)
+        {
+            // Localization for commands
+            CommandList.transform.GetChild(0).GetComponent<Text>().text = Language.Commands[3];
+            CommandList.transform.GetChild(1).GetComponent<Text>().text = Language.Commands[0];
+            CommandList.transform.GetChild(2).GetComponent<Text>().text = Language.Commands[1];
+            CommandList.transform.GetChild(3).GetComponent<Text>().text = Language.Commands[2];
+            CommandList.SetActive(true);
+        }
+        else
+            CommandList.SetActive(false);
     }
 
     // Change Car Material

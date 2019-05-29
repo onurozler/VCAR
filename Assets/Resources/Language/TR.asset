@@ -12,5 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256282324d2d374458ed1181e86b6337, type: 3}
   m_Name: TR
   m_EditorClassIdentifier: 
-  Commands: []
-  CommandManager: []
+  Commands:
+  - "G\xF6ster/Kapa = Bilgi, \xD6zellik"
+  - "A\xE7/Kapa = S\xFCr\xFCc\xFC Kap\u0131s\u0131, Kap\u0131"
+  - "De\u011Fi\u015Ftir = Araba Rengi, Renk"
+  - Ses Kontrol - Komuta Listesi
+  CommandManager:
+  - Komut Dinleniyor...
+  - "\u0130stek G\xF6nderiliyor..."
+  - Bekleyiniz...
+  - BASARISIZ
+  - "Istek basar\u0131s\u0131z, farkl\u0131 bir sekilde deneyiniz."

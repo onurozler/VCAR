@@ -57,6 +57,8 @@ public partial class Wit3D : MonoBehaviour {
 	//public VideoPlayer vidScreen;
 	//public GameObject vidCanvas;
 
+    private LanguageInfo _language;
+
 	// Use this for initialization
 	void Start () {
 
@@ -68,7 +70,8 @@ public partial class Wit3D : MonoBehaviour {
 		// set samplerate to 16000 for wit.ai
 		samplerate = 16000;
 		//vidScreen.GetComponent<VideoPlayer> ();
-	}
+        _language = GetComponent<ARSceneManager>().Language;
+    }
 
     //Custom 2
     // Customized by Onur
@@ -104,22 +107,23 @@ public partial class Wit3D : MonoBehaviour {
 	void Update () {
 		if (pressedButton == true) {
 			pressedButton = false;
-			if (isRecording) {
-				myResultBox.text = "Listening for command";
-				commandClip = Microphone.Start (null, false, 3, samplerate);  //Start recording (rewriting older recordings)
+			if (isRecording)
+            {
+                myResultBox.text = _language.CommandManager[0];
+                commandClip = Microphone.Start (null, false, 3, samplerate);  //Start recording (rewriting older recordings)
 			}
 
 			//Custom 5
 			if (!isRecording) {
 				myResultBox.text = null;
-				myResultBox.text = "Saving Voice Request";
-				// Save the audio file
-				Microphone.End (null);
+				myResultBox.text = _language.CommandManager[1];
+                // Save the audio file
+                Microphone.End (null);
 				if (SavWav.Save ("sample", commandClip)) {
-					myResultBox.text = "Sending audio to AI...";
-				} else {
-					myResultBox.text = "FAILED";
-				}
+					myResultBox.text = _language.CommandManager[2];
+                } else {
+					myResultBox.text = _language.CommandManager[3];
+                }
 
 				// At this point, we can delete the existing audio clip
 				commandClip = null;

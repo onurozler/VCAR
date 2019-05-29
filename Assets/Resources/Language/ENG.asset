@@ -12,5 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256282324d2d374458ed1181e86b6337, type: 3}
   m_Name: ENG
   m_EditorClassIdentifier: 
-  Commands: []
-  CommandManager: []
+  Commands:
+  - Show/Close = Information, Info
+  - Open/Close = Driver's Door, Door
+  - Change = Car Color, Color
+  - Voice Control - Commend List
+  CommandManager:
+  - Listening for Command...
+  - Saving Voice Request
+  - Waiting...
+  - FAILED
+  - Request unknown, please ask a different way.
