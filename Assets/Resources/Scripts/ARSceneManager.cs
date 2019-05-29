@@ -59,6 +59,37 @@ public class ARSceneManager : MonoBehaviour
         CarScaleSlider.value = 0.5f;
     }
 
+    public void GoToMainMenu()
+    {
+        ChangeCarMaterial(true);
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    // Update Car Scale
+    void Update()
+    {
+        //_selectedCar.transform.localScale = new Vector3(_selectedCar.transform.localScale.x, _selectedCar.transform.localScale.y, _selectedCar.transform.localScale.z) * CarScaleSlider.value;
+    }
+
+    void OnApplicationQuit()
+    {
+        ChangeCarMaterial(true);
+    }
+
+    // ******************************** Voice Controlled Commends Sections ********************************* //
+
+    // Trigger Car Open/Close Driver Door Animation
+    public void OpenTheDoor(bool yes)
+    {
+        _selectedCar.GetComponent<Animator>().ResetTrigger("OpenTheDoor");
+        _selectedCar.GetComponent<Animator>().ResetTrigger("CloseTheDoor");
+        if (yes)
+            _selectedCar.GetComponent<Animator>().SetTrigger("OpenTheDoor");
+        else
+            _selectedCar.GetComponent<Animator>().SetTrigger("CloseTheDoor");
+
+    }
+
     // Open Commands Section
     public void OpenCommands(bool yes)
     {
@@ -91,18 +122,6 @@ public class ARSceneManager : MonoBehaviour
             CardInfo.SetActive(true);
         else
             CardInfo.SetActive(false);
-    }
-
-    public void GoToMainMenu()
-    {
-        ChangeCarMaterial(true);
-        SceneManager.LoadScene("MainMenu");
-    }
-
-    // Update Car Scale
-    void Update()
-    {
-        _selectedCar.transform.localScale = new Vector3(_selectedCar.transform.localScale.x, _selectedCar.transform.localScale.y, _selectedCar.transform.localScale.z) * CarScaleSlider.value;
     }
 
 }

@@ -22,9 +22,15 @@ public partial class Wit3D : MonoBehaviour {
 
 			if (theAction.entities.open != null) {
 				foreach (Entity aPart in theAction.entities.open) {
-					myHandleTextBox.text = aPart.value;
-					actionFound = true;
-				}
+                    if (aPart.value.Contains("drivers door") || aPart.value.Contains("kapı"))
+                    {
+                        myHandleTextBox.text = "";
+                        GetComponent<ARSceneManager>().OpenTheDoor(true);
+                        actionFound = true;
+                    }
+                    else
+                        actionFound = false;
+                }
 			}
 			if (theAction.entities.close != null) {
 				foreach (Entity aPart in theAction.entities.close) {
@@ -32,8 +38,17 @@ public partial class Wit3D : MonoBehaviour {
                     {
                         myHandleTextBox.text = "";
                         GetComponent<ARSceneManager>().OpenCardInfo(false);
+                        actionFound = true;
                     }
-                    actionFound = true;
+                    else if (aPart.value.Contains("drivers door") || aPart.value.Contains("kapı"))
+                    {
+                        myHandleTextBox.text = "";
+                        GetComponent<ARSceneManager>().OpenTheDoor(false);
+                        actionFound = true;
+                    }
+                    else
+                        actionFound = false;
+                    
 				}
 			}
             if (theAction.entities.change != null)
@@ -44,8 +59,11 @@ public partial class Wit3D : MonoBehaviour {
                     {
                         myHandleTextBox.text = "";
                         GetComponent<ARSceneManager>().ChangeCarMaterial(false);
+                        actionFound = true;
                     }
-                    actionFound = true;
+                    else
+                        actionFound = false;
+
                 }
             }
             if (theAction.entities.show != null)
@@ -56,8 +74,11 @@ public partial class Wit3D : MonoBehaviour {
                     {
                         myHandleTextBox.text = "";
                         GetComponent<ARSceneManager>().OpenCardInfo(true);
+                        actionFound = true;
                     }
-                    actionFound = true;
+                    else
+                        actionFound = false;
+                    
                 }
             }
 
