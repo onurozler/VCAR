@@ -12,7 +12,8 @@ public partial class Wit3D : MonoBehaviour {
 	public Text myHandleTextBox;
 	private bool actionFound = false;
 
-	void Handle (string jsonString) {
+
+    void Handle (string jsonString) {
 		
 		if (jsonString != null) {
 
@@ -21,24 +22,41 @@ public partial class Wit3D : MonoBehaviour {
 
 			if (theAction.entities.open != null) {
 				foreach (Entity aPart in theAction.entities.open) {
-					Debug.Log (aPart.value);
 					myHandleTextBox.text = aPart.value;
 					actionFound = true;
 				}
 			}
 			if (theAction.entities.close != null) {
 				foreach (Entity aPart in theAction.entities.close) {
-					Debug.Log (aPart.value);
-					myHandleTextBox.text = aPart.value;
-					actionFound = true;
+                    if (aPart.value.Contains("information") || aPart.value.Contains("özellik"))
+                    {
+                        myHandleTextBox.text = "";
+                        GetComponent<ARSceneManager>().OpenCardInfo(false);
+                    }
+                    actionFound = true;
 				}
 			}
             if (theAction.entities.change != null)
             {
                 foreach (Entity aPart in theAction.entities.change)
                 {
-                    Debug.Log(aPart.value);
-                    myHandleTextBox.text = aPart.value;
+                    if (aPart.value.Contains("color") || aPart.value.Contains("renk"))
+                    {
+                        myHandleTextBox.text = "";
+                        GetComponent<ARSceneManager>().ChangeCarMaterial(false);
+                    }
+                    actionFound = true;
+                }
+            }
+            if (theAction.entities.show != null)
+            {
+                foreach (Entity aPart in theAction.entities.show)
+                {
+                    if (aPart.value.Contains("information") || aPart.value.Contains("özellik"))
+                    {
+                        myHandleTextBox.text = "";
+                        GetComponent<ARSceneManager>().OpenCardInfo(true);
+                    }
                     actionFound = true;
                 }
             }
@@ -55,7 +73,8 @@ public partial class Wit3D : MonoBehaviour {
  	}//END OF HANDLE VOID
 
 }//END OF CLASS
-	
+
+
 
 // Customized by Onur
 public class Entity {
@@ -69,6 +88,7 @@ public class Entities {
 	public List<Entity> open { get; set; }
     public List<Entity> close { get; set; }
     public List<Entity> change { get; set; }
+    public List<Entity> show { get; set; }
 }
 
 public class RootObject {
