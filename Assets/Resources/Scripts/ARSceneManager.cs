@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Comparers;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -55,22 +56,34 @@ public class ARSceneManager : MonoBehaviour
             _tempMaterial.CopyPropertiesFromMaterial(_selectedCarMaterial);
         }
 
-        // Starting slider Value
-        CarScaleSlider.value = 0.5f;
+        _sliderPastValue = CarScaleSlider.value;
+        CarScaleSlider.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
     }
 
+    private float _sliderPastValue;
+    // Slider Value Change Checker
+    public void ValueChangeCheck()
+    {
+        if (Mathf.Abs(_sliderPastValue - CarScaleSlider.value) <= 0.05f)
+            return;
+
+        if (_sliderPastValue < CarScaleSlider.value)
+            _selectedCar.transform.localScale += Vector3.one/10;
+        else
+            _selectedCar.transform.localScale -= Vector3.one/10;
+
+        _sliderPastValue = CarScaleSlider.value;
+
+    }
+
+    // Return to main menu
     public void GoToMainMenu()
     {
         ChangeCarMaterial(true);
         SceneManager.LoadScene("MainMenu");
     }
 
-    // Update Car Scale
-    void Update()
-    {
-        //_selectedCar.transform.localScale = new Vector3(_selectedCar.transform.localScale.x, _selectedCar.transform.localScale.y, _selectedCar.transform.localScale.z) * CarScaleSlider.value;
-    }
-
+    // When Quit App, fix the material
     void OnApplicationQuit()
     {
         ChangeCarMaterial(true);
