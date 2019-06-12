@@ -1,12 +1,14 @@
 ![](http://www.sebahattinonurozler.com/wp-content/uploads/2019/06/sa.gif)
 # VCAR
-Turkish and English Voice Controlled, Augmented Reality Car Showroom Application. 
+Turkish and English Voice Controlled, Augmented Reality Car Showroom Application. Inspired by Diego Herrera courses.
 
 ### Features
 
 Cars :
 - Audi R8
 - Lamborghini Gallordo
+
+Can use Commands by clicking microphone button.
 
 Commands : 
 - Open/Close Car Door
@@ -23,9 +25,9 @@ Made with:
 
 Google Play : Soon
 
-Turkish App Test : Soon
+[Turkish App Test](https://www.youtube.com/watch?v=w14ustv_jkw)
 
-English App Test : Soon
+[English App Test](https://youtu.be/L3s-YnNE4N8)
 
 ## How to Use
 It is made with Unity Version : 2019.1.3f1, recommend you to use exactly this version. Need to do some configurations.
