@@ -23,7 +23,7 @@ Made with:
 
 ## Media & Download Link
 
-Google Play : Soon
+[Google Play](https://play.google.com/store/apps/details?id=com.OnurOzler.VCAR) 
 
 [Turkish App Test](https://www.youtube.com/watch?v=w14ustv_jkw)
 
